@@ -588,9 +588,9 @@
                     <li class="sidebar-title">Pages</li>
 
                     <li class="sidebar-item">
-                        <a href="application-email.html" class="sidebar-link">
+                        <a href="admin/logout" class="sidebar-link">
                             <i class="bi bi-envelope-fill"></i>
-                            <span>Email Application</span>
+                            <span>Sign out</span>
                         </a>
                     </li>
 
