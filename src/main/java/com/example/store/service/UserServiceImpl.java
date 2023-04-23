@@ -33,6 +33,11 @@ public class UserServiceImpl implements UserService {
         return (ArrayList<User>) userRepository.findAll();
     }
 
+    @Override
+    public void insert(User user) {
+        userRepository.save(user);
+    }
+
     private void validationUserLogin(UserDto user) throws StoreException {
         if (user.getUsername().isBlank()) {
             throw new StoreException(Error.ERROR03);

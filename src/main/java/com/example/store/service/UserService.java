@@ -12,4 +12,6 @@ public interface UserService {
     User login(UserDto userDto) throws StoreException;
 
     List<User> findAllUser();
+
+    void insert(User user);
 }

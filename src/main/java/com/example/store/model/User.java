@@ -26,7 +26,7 @@ public class User extends BaseEntity {
     private Boolean isActive;
     private Gender gender;
     private String phone;
-    private String isFirstLogin;
+    private Boolean isFirstLogin;
     private UserRole role;
 
     @Temporal(TemporalType.TIMESTAMP)
