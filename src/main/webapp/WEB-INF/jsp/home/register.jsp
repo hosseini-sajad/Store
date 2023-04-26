@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.store.core.Gender" %><%--
   Created by IntelliJ IDEA.
   User: DEV
   Date: 4/23/2023
@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,17 +90,19 @@
         <div class="card mb-4" id="forms">
             <div class="card-header">Sign up</div>
             <div class="card-body">
-                <form>
+                <form:form class="user" action="/user/signup" method="post" modelAttribute="user">
                     <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="inputEmail3">Email</label>
+                        <label class="col-sm-2 col-form-label" for="inputEmail3">Username</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputEmail3" type="email">
+                            <form:input class="form-control" id="inputEmail3" placeholder="Username..." type="text"
+                                        path="username" />
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label" for="inputPassword3">Password</label>
                         <div class="col-sm-10">
-                            <input class="form-control" id="inputPassword3" type="password">
+                            <form:input class="form-control" id="inputPassword3" type="password" placeholder="Password"
+                                        path="password"/>
                         </div>
                     </div>
                     <fieldset>
@@ -107,24 +110,24 @@
                             <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
                             <div class="col-sm-10">
                                 <div class="form-check">
-                                    <input class="form-check-input" id="gridRadios1" type="radio" name="gridRadios"
-                                           value="option1" checked>
+                                    <form:radiobutton class="form-check-input" id="gridRadios1" name="gridRadios"
+                                                value="<%= Gender.MALE%>"  path="gender"/>
                                     <label class="form-check-label" for="gridRadios1">
                                         Male
 
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" id="gridRadios2" type="radio" name="gridRadios"
-                                           value="option2">
+                                    <form:radiobutton  class="form-check-input" id="gridRadios2" name="gridRadios"
+                                                value="<%= Gender.FEMALE%>" path="gender"/>
                                     <label class="form-check-label" for="gridRadios2">
                                         Female
 
                                     </label>
                                 </div>
                                 <div class="form-check disabled">
-                                    <input class="form-check-input" id="gridRadios3" type="radio" name="gridRadios"
-                                           value="option3">
+                                    <form:radiobutton  class="form-check-input" id="gridRadios3" name="gridRadios"
+                                                value="<%= Gender.UNKNOWN%>" path="gender"/>
                                     <label class="form-check-label" for="gridRadios3">
                                         Unknown
 
@@ -133,8 +136,8 @@
                             </div>
                         </div>
                     </fieldset>
-                    <button class="btn btn-primary" type="submit">Sign up</button>
-                </form>
+                    <form:button class="btn btn-primary" type="submit">Sign up</form:button>
+                </form:form>
             </div>
         </div>
     </div>

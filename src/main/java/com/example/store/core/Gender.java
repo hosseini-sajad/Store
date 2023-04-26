@@ -6,9 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Gender {
-    MALE("مرد"),
-    FEMALE("زن"),
-    UNKNOWN("نامشخص");
+    MALE(0, "مرد"),
+    FEMALE(1, "زن"),
+    UNKNOWN(2, "نامشخص");
 
+    private final Integer Key;
     private final String value;
 }

@@ -13,5 +13,5 @@ public interface UserService {
 
     List<User> findAllUser();
 
-    void insert(User user);
+    void signup(User user) throws StoreException;
 }
