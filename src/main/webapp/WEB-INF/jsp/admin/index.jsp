@@ -15,7 +15,7 @@
 
     <link
             rel="shortcut icon"
-            href="backend/compiled/svg/favicon.svg"
+            href="${pageContext.request.contextPath}/backend/compiled/svg/favicon.svg"
             type="image/x-icon"
     />
     <link
@@ -24,13 +24,13 @@
             type="image/png"
     />
 
-    <link rel="stylesheet" href="backend/compiled/css/app.css" />
-    <link rel="stylesheet" href="backend/compiled/css/app-dark.css" />
-    <link rel="stylesheet" href="backend/compiled/css/iconly.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app-dark.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/iconly.css" />
 </head>
 
 <body>
-<script src="backend/static/js/initTheme.js"></script>
+<script src="${pageContext.request.contextPath}/backend/static/js/initTheme.js"></script>
 <div id="app">
     <div id="sidebar">
         <div class="sidebar-wrapper active">
@@ -39,7 +39,7 @@
                     <div class="logo">
                         <a href="index.html"
                         ><img
-                                src="backend/compiled/svg/logo.svg"
+                                src="${pageContext.request.contextPath}/backend/compiled/svg/logo.svg"
                                 alt="Logo"
                                 srcset=""
                         /></a>
@@ -588,7 +588,7 @@
                     <li class="sidebar-title">Pages</li>
 
                     <li class="sidebar-item">
-                        <a href="admin/logout" class="sidebar-link">
+                        <a href="/user/logout" class="sidebar-link">
                             <i class="bi bi-envelope-fill"></i>
                             <span>Sign out</span>
                         </a>
@@ -893,7 +893,7 @@
                                                 <td class="col-3">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
-                                                            <img src="backend/compiled/jpg/5.jpg" />
+                                                            <img src="${pageContext.request.contextPath}/backend/compiled/jpg/5.jpg" />
                                                         </div>
                                                         <p class="font-bold ms-3 mb-0">Si Cantik</p>
                                                     </div>
@@ -908,7 +908,7 @@
                                                 <td class="col-3">
                                                     <div class="d-flex align-items-center">
                                                         <div class="avatar avatar-md">
-                                                            <img src="backend/compiled/jpg/2.jpg" />
+                                                            <img src="${pageContext.request.contextPath}/backend/compiled/jpg/2.jpg" />
                                                         </div>
                                                         <p class="font-bold ms-3 mb-0">Si Ganteng</p>
                                                     </div>
@@ -933,7 +933,7 @@
                         <div class="card-body py-4 px-4">
                             <div class="d-flex align-items-center">
                                 <div class="avatar avatar-xl">
-                                    <img src="backend/compiled/jpg/1.jpg" alt="Face 1" />
+                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/1.jpg" alt="Face 1" />
                                 </div>
                                 <div class="ms-3 name">
                                     <h5 class="font-bold">John Duck</h5>
@@ -949,7 +949,7 @@
                         <div class="card-content pb-4">
                             <div class="recent-message d-flex px-4 py-3">
                                 <div class="avatar avatar-lg">
-                                    <img src="backend/compiled/jpg/4.jpg" />
+                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/4.jpg" />
                                 </div>
                                 <div class="name ms-4">
                                     <h5 class="mb-1">Hank Schrader</h5>
@@ -958,7 +958,7 @@
                             </div>
                             <div class="recent-message d-flex px-4 py-3">
                                 <div class="avatar avatar-lg">
-                                    <img src="backend/compiled/jpg/5.jpg" />
+                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/5.jpg" />
                                 </div>
                                 <div class="name ms-4">
                                     <h5 class="mb-1">Dean Winchester</h5>
@@ -967,7 +967,7 @@
                             </div>
                             <div class="recent-message d-flex px-4 py-3">
                                 <div class="avatar avatar-lg">
-                                    <img src="backend/compiled/jpg/1.jpg" />
+                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/1.jpg" />
                                 </div>
                                 <div class="name ms-4">
                                     <h5 class="mb-1">John Dodol</h5>
@@ -1013,13 +1013,13 @@
         </footer>
     </div>
 </div>
-<script src="backend/static/js/components/dark.js"></script>
-<script src="backend/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="${pageContext.request.contextPath}/backend/static/js/components/dark.js"></script>
+<script src="${pageContext.request.contextPath}/backend/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
-<script src="backend/compiled/js/app.js"></script>
+<script src="${pageContext.request.contextPath}/backend/compiled/js/app.js"></script>
 
 <!-- Need: Apexcharts -->
-<script src="backend/extensions/apexcharts/apexcharts.min.js"></script>
-<script src="backend/static/js/pages/dashboard.js"></script>
+<script src="${pageContext.request.contextPath}/backend/extensions/apexcharts/apexcharts.min.js"></script>
+<script src="${pageContext.request.contextPath}/backend/static/js/pages/dashboard.js"></script>
 </body>
 </html>

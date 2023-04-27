@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,15 +90,16 @@
         <div class="card mb-4" id="forms">
             <div class="card-header">Sign in</div>
             <div class="card-body">
-                <form>
+                <form:form class="user" action="/user/login" method="post" modelAttribute="UserDto">
                     <div class="mb-3">
                         <label class="form-label" for="exampleInputEmail1">Email address</label>
-                        <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp">
+                        <form:input class="form-control" id="exampleInputEmail1" type="text"
+                                    aria-describedby="emailHelp" path="username"/>
                         <div class="form-text" id="emailHelp">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="exampleInputPassword1">Password</label>
-                        <input class="form-control" id="exampleInputPassword1" type="password">
+                        <form:input class="form-control" id="exampleInputPassword1" type="password" path="password"/>
                     </div>
                     <div class="mb-3 form-check">
                         <input class="form-check-input" id="exampleCheck1" type="checkbox">
@@ -106,8 +108,8 @@
                     <div class="mb-3">
                         <a class="ql-color-blue" id="createAccount" href="/user/signup">Create new Account</a>
                     </div>
-                    <button class="btn btn-primary" type="submit">Sign in</button>
-                </form>
+                    <form:button class="btn btn-primary" type="submit">Sign in</form:button>
+                </form:form>
             </div>
         </div>
     </div>

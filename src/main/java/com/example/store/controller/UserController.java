@@ -35,7 +35,11 @@ public class UserController {
         try {
             User user = userService.login(userDto);
             servletRequest.getSession().setAttribute(Constant.USER_SESSION, user);
-            return new ModelAndView("redirect:/user/login");
+            if (user.getRole() != UserRole.User){
+                return new ModelAndView("redirect:/user/admin");
+            } else {
+                return new ModelAndView("redirect:/user/login");
+            }
         } catch (StoreException e) {
             return new ModelAndView("error", new HashMap<>(){{
                 put("code", e.getCode());
@@ -66,7 +70,7 @@ public class UserController {
     @GetMapping("/admin")
     public ModelAndView admin(HttpServletRequest servletRequest) {
         if (servletRequest.getSession().getAttribute(Constant.USER_SESSION) == null) {
-            return new ModelAndView("admin/login", new HashMap<>(){{
+            return new ModelAndView("home/login", new HashMap<>(){{
                 put("user", new UserDto());
             }});
         }
