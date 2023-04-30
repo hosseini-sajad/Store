@@ -38,7 +38,7 @@ public class UserController {
             if (user.getRole() != UserRole.User){
                 return new ModelAndView("redirect:/user/admin");
             } else {
-                return new ModelAndView("redirect:/user/login");
+                return new ModelAndView("redirect:/");
             }
         } catch (StoreException e) {
             return new ModelAndView("error", new HashMap<>(){{
