@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public void signup(User user) throws StoreException {
         validationUserRegister(user);
-        fillUser(user);
-        userRepository.save(user);
+        User fillUser = fillUser(user);
+        userRepository.save(fillUser);
     }
 
     private User fillUser(User user) {
