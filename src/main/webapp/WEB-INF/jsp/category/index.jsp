@@ -746,11 +746,29 @@
                                             placeholder="Enter category name"
                                     />
                                 </div>
+
                             </div>
+                            <div class="col-md-6">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle mt-4 show" type="button"
+                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="true">
+                                            Primary
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                             style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);"
+                                             data-popper-placement="bottom-start">
+                                            <a class="dropdown-item" href="#">option 1</a>
+                                        </div>
+                                    </div>
+
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </section>
+
 
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
