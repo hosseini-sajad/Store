@@ -1,0 +1,42 @@
+.sui-treeview {
+    color: #6d6d6d;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: normal;
+    cursor: default;
+    text-align: left;
+    background-color: unset !important;
+    border: 1px solid #35354f;
+    border-radius: .25rem;
+    margin: 6%;
+}
+.treeview-icon
+{
+    width: 16px;
+    height: 16px;
+    background-image: url("/Content/img/file/file-icons-sprite.png");
+}
+.icon-folder
+{
+    background-position: 0px 0px;
+}
+.icon-png
+{
+    background-position: -16px 0px;
+}
+.icon-txt
+{
+    background-position: -32px 0px;
+}
+.icon-pdf
+{
+    background-position: -48px 0px;
+}
+.icon-doc
+{
+    background-position: -64px 0px;
+}
+.icon-xls
+{
+    background-position: -80px 0px;
+}

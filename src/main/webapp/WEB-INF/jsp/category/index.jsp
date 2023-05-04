@@ -24,8 +24,10 @@
             type="image/png"
     />
 
-    <link rel="stylesheet" href="backend/compiled/css/app.css"/>
-    <link rel="stylesheet" href="backend/compiled/css/app-dark.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app-dark.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/backend/compiled/css/tree-view.css"/>
+    <link id="themecss" rel="stylesheet" type="text/css" href="//www.shieldui.com/shared/components/latest/css/light/all.min.css" />
 </head>
 
 <body>
@@ -734,6 +736,47 @@
                         <h4 class="card-title">Add new Category</h4>
                     </div>
 
+                    <%-- Category Section   --%>
+                    <label for="basicInput" class="mx-4">Select Category</label>
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-4">
+                                <ul id="treeview">
+                                    <li data-icon-cls="bi-folder" data-expanded="true">Inbox
+                                        <ul>
+                                            <li><b>Today (2)</b></li>
+                                            <li>Monday</li>
+                                            <li>Last Week</li>
+                                        </ul>
+                                    </li>
+                                    <li >Trash
+                                    </li>
+                                    <li>Calendar
+                                        <ul>
+                                            <li>Day</li>
+                                            <li>Week</li>
+                                            <li>Month</li>
+                                        </ul>
+                                    </li>
+                                    <li>Contacts
+                                        <ul>
+                                            <li>Alexander Stein</li>
+                                            <li>John Doe</li>
+                                            <li>Paul Smith</li>
+                                            <li>Steward Lynn</li>
+                                        </ul>
+                                    </li>
+                                    <li>Folders
+                                        <ul>
+                                            <li>Backup</li>
+                                            <li>Deleted</li>
+                                            <li>Projects</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    <%-- End Category Section   --%>
+
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -792,6 +835,61 @@
     <script src="backend/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <script src="backend/compiled/js/app.js"></script>
+
+    <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#treeview").shieldTreeView({
+
+            });
+        });
+    </script>
 </div>
+
+<%--<style>
+    .sui-treeview {
+        color: #6d6d6d;
+        font-family: Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: normal;
+        cursor: default;
+        text-align: left;
+        background-color: unset;
+        border: 1px solid #35354f;
+        margin: 5%;
+    }
+    .treeview-icon
+    {
+        width: 16px;
+        height: 16px;
+        background-image: url("/Content/img/file/file-icons-sprite.png");
+    }
+    .icon-folder
+    {
+        background-position: 0px 0px;
+    }
+    .icon-png
+    {
+        background-position: -16px 0px;
+    }
+    .icon-txt
+    {
+        background-position: -32px 0px;
+    }
+    .icon-pdf
+    {
+        background-position: -48px 0px;
+    }
+    .icon-doc
+    {
+        background-position: -64px 0px;
+    }
+    .icon-xls
+    {
+        background-position: -80px 0px;
+    }
+</style>--%>
 </body>
 </html>
