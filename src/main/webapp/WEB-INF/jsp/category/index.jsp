@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -736,42 +737,16 @@
                         <h4 class="card-title">Add new Category</h4>
                     </div>
 
+                    <form:form class="category" action="/category" method="post" modelAttribute="category">
                     <%-- Category Section   --%>
                     <label for="basicInput" class="mx-4">Select Category</label>
                         <div class="row">
                             <div class="col-md-4 col-md-offset-4">
                                 <ul id="treeview">
-                                    <li data-icon-cls="bi-folder" data-expanded="true">Inbox
-                                        <ul>
-                                            <li><b>Today (2)</b></li>
-                                            <li>Monday</li>
-                                            <li>Last Week</li>
-                                        </ul>
+                                    <li>
+
                                     </li>
-                                    <li >Trash
-                                    </li>
-                                    <li>Calendar
-                                        <ul>
-                                            <li>Day</li>
-                                            <li>Week</li>
-                                            <li>Month</li>
-                                        </ul>
-                                    </li>
-                                    <li>Contacts
-                                        <ul>
-                                            <li>Alexander Stein</li>
-                                            <li>John Doe</li>
-                                            <li>Paul Smith</li>
-                                            <li>Steward Lynn</li>
-                                        </ul>
-                                    </li>
-                                    <li>Folders
-                                        <ul>
-                                            <li>Backup</li>
-                                            <li>Deleted</li>
-                                            <li>Projects</li>
-                                        </ul>
-                                    </li>
+                                    <li></li>
                                 </ul>
                             </div>
                         </div>
@@ -782,33 +757,23 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="basicInput">Category Name</label>
-                                    <input
+                                    <form:input
                                             type="text"
                                             class="form-control"
                                             id="basicInput"
                                             placeholder="Enter category name"
+                                            path="name"
                                     />
                                 </div>
 
                             </div>
                             <div class="col-md-6">
-                                    <div class="dropdown">
-                                        <button class="btn btn-primary dropdown-toggle mt-4 show" type="button"
-                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                aria-expanded="true">
-                                            Primary
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
-                                             style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 40px);"
-                                             data-popper-placement="bottom-start">
-                                            <a class="dropdown-item" href="#">option 1</a>
-                                        </div>
-                                    </div>
-
+                                <form:button class="btn btn-primary" type="submit">Sign in</form:button>
                             </div>
 
                         </div>
                     </div>
+                    </form:form>
                 </div>
             </section>
 
@@ -841,9 +806,7 @@
 
     <script type="text/javascript">
         jQuery(function ($) {
-            $("#treeview").shieldTreeView({
-
-            });
+            var treeview = $("#treeview").shieldTreeView().swidget();
         });
     </script>
 </div>

@@ -4,8 +4,12 @@ import com.example.store.core.Error;
 import com.example.store.core.StoreException;
 import com.example.store.model.Category;
 import com.example.store.repository.CategoryRepository;
+import org.hibernate.event.internal.EntityState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -17,13 +21,18 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void insertCategory(Category category, Category parent) throws StoreException {
         validateCategory(category);
-        Category fillCategory = fillCategory(category, parent);
-        categoryRepository.save(fillCategory);
+        fillCategory(category, parent);
+        categoryRepository.save(category);
     }
 
-    private Category fillCategory(Category category, Category parent) {
+    @Override
+    public List<Category> findAllCategories() {
+        return (ArrayList<Category>) categoryRepository.findAll();
+    }
+
+    private void fillCategory(Category category, Category parent) {
         category.setParent(parent);
-        return category;
+        category.setEntityState(EntityState.PERSISTENT);
     }
 
     private void validateCategory(Category category) throws StoreException {
