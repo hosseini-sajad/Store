@@ -39,11 +39,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void signup(User user) throws StoreException {
         validationUserRegister(user);
-        User fillUser = fillUser(user);
-        userRepository.save(fillUser);
+        fillUserExceptBackdoor(user);
+        userRepository.save(user);
     }
 
-    private User fillUser(User user) {
+    private void fillUserExceptBackdoor(User user) {
         if (user.getRole() != UserRole.Backdoor) {
             user.setRole(UserRole.User);
             user.setIsActive(true);
@@ -51,9 +51,7 @@ public class UserServiceImpl implements UserService {
             user.setPhone("02123");
             user.setEmail("s@yahoo.com");
             user.setEntityState(EntityState.PERSISTENT);
-            return user;
         }
-        return user;
     }
 
     private void validationUserLogin(UserDto user) throws StoreException {
