@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Category extends BaseEntity {
-    private String name;
+    private String title;
 
     @OneToMany(targetEntity = Category.class, mappedBy = "parent", fetch = FetchType.LAZY)
     private List<Category> categories;

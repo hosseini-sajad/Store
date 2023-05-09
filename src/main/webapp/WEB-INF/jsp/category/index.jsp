@@ -7,6 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib prefix="li" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,8 +29,31 @@
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app.css"/>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app-dark.css"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/backend/compiled/css/tree-view.css"/>
-    <link id="themecss" rel="stylesheet" type="text/css" href="//www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+    <style type="text/css" id="treeview1-style"> .treeview .list-group-item {
+        cursor: pointer
+    }
+
+    .treeview span.indent {
+        margin-left: 10px;
+        margin-right: 10px
+    }
+
+    .treeview span.icon {
+        width: 12px;
+        margin-right: 5px
+    }
+
+    .treeview .node-disabled {
+        color: silver;
+        cursor: not-allowed
+    }
+
+    .node-treeview1 {
+    }
+
+    .node-treeview1:not(.node-disabled):hover {
+        background-color: #F5F5F5;
+    } </style>
 </head>
 
 <body>
@@ -737,16 +762,36 @@
                         <h4 class="card-title">Add new Category</h4>
                     </div>
 
-                    <form:form class="category" action="/category" method="post" modelAttribute="category">
+                    <form:form class="category" action="/category" method="post" modelAttribute="categoryDto">
                     <%-- Category Section   --%>
-                    <label for="basicInput" class="mx-4">Select Category</label>
-                        <div class="row">
-                            <div class="col-md-4 col-md-offset-4">
-                                <ul id="treeview">
-                                    <li>
+                        <div class="col-sm-4">
+                            <form:hidden id="parentId" path="parentId"/>
+                            <div id="treeview1" class="treeview">
+                                <ul class="list-group">
+                                    <c:choose>
+                                        <c:when test="${!empty list}">
+                                            <c:forEach items="${list}" var="myvar">
+                                                <li class="list-group-item node-treeview1" id="${myvar.id}" style="color:undefined;background-color:undefined;"><span
+                                                        class="icon expand-icon glyphicon glyphicon-minus"></span><span class="icon node-icon"></span> ${myvar.title}
+                                                <c:choose>
+                                                    <c:when test="${!empty myvar.children}">
+                                                        <c:forEach items="${myvar.children}" var="children">
+                                                            <li class="list-group-item node-treeview1" id="${children.id}" style="color:undefined;background-color:undefined;">
+                                                            <span class="indent"></span>
+                                                            <span class="icon expand-icon glyphicon glyphicon-minus"></span><span class="icon node-icon"></span> ${children.title}
 
-                                    </li>
-                                    <li></li>
+                                                        </c:forEach>
+                                                    </c:when>
+                                                </c:choose>
+                                                </li>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                                <td colspan="5">موردی برای نمایش یافت نشد</td>
+                                            </tr>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </ul>
                             </div>
                         </div>
@@ -762,7 +807,7 @@
                                             class="form-control"
                                             id="basicInput"
                                             placeholder="Enter category name"
-                                            path="name"
+                                            path="title"
                                     />
                                 </div>
 
@@ -801,58 +846,19 @@
 
     <script src="backend/compiled/js/app.js"></script>
 
-    <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    <script src="jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/backend/compiled/js/bootstrap-treeview.js"></script>
 
-    <script type="text/javascript">
-        jQuery(function ($) {
-            var treeview = $("#treeview").shieldTreeView().swidget();
-        });
+    <script>
+            var a = document.getElementById('treeview1').getElementsByTagName('li');
+
+            for (var i = 0; i < a.length; i++) {
+                a[i].onclick = function () {
+                    document.getElementById('parentId').setAttribute('value', this.id);
+                }
+            }
+
     </script>
 </div>
-
-<%--<style>
-    .sui-treeview {
-        color: #6d6d6d;
-        font-family: Helvetica,Arial,sans-serif;
-        font-size: 14px;
-        line-height: normal;
-        cursor: default;
-        text-align: left;
-        background-color: unset;
-        border: 1px solid #35354f;
-        margin: 5%;
-    }
-    .treeview-icon
-    {
-        width: 16px;
-        height: 16px;
-        background-image: url("/Content/img/file/file-icons-sprite.png");
-    }
-    .icon-folder
-    {
-        background-position: 0px 0px;
-    }
-    .icon-png
-    {
-        background-position: -16px 0px;
-    }
-    .icon-txt
-    {
-        background-position: -32px 0px;
-    }
-    .icon-pdf
-    {
-        background-position: -48px 0px;
-    }
-    .icon-doc
-    {
-        background-position: -64px 0px;
-    }
-    .icon-xls
-    {
-        background-position: -80px 0px;
-    }
-</style>--%>
 </body>
 </html>

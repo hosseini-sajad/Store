@@ -1,7 +1,7 @@
 package com.example.store.controller;
 
 import com.example.store.core.StoreException;
-import com.example.store.model.Category;
+import com.example.store.dto.CategoryDto;
 import com.example.store.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,24 +23,18 @@ public class CategoryController {
     @GetMapping("")
     public ModelAndView insertCategory() {
         return new ModelAndView("category/index", new HashMap<>() {{
-            put("category", new Category());
+            put("categoryDto", new CategoryDto());
+            put("list", categoryService.findAllCategories());
         }});
     }
 
     @PostMapping("")
-    public ModelAndView insertCategory(@ModelAttribute Category category) {
+    public ModelAndView insertCategory(@ModelAttribute CategoryDto categoryDto) {
         try {
-            categoryService.insertCategory(category, null);
+            categoryService.insertCategory(categoryDto);
             return new ModelAndView("redirect:/category");
         }catch (StoreException e) {
             return new ModelAndView("redirect:/");
         }
     }
-
-//    @GetMapping("/getcategories")
-//    public ModelAndView findAllCategories(@ModelAttribute ModelMap model) {
-//        List<Category> categories = categoryService.findAllCategories();
-//        model.put("categories", categories);
-//        return ModelAndView("categor/index", categories);
-//    }
 }
