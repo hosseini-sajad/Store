@@ -5,10 +5,8 @@ import com.example.store.dto.CategoryDto;
 import com.example.store.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -24,13 +22,16 @@ public class CategoryController {
     public ModelAndView insertCategory() {
         return new ModelAndView("category/index", new HashMap<>() {{
             put("categoryDto", new CategoryDto());
-            put("list", categoryService.findAllCategories());
+            put("list", categoryService.getHierarchyCategories());
         }});
     }
 
     @PostMapping("")
     public ModelAndView insertCategory(@ModelAttribute CategoryDto categoryDto) {
         try {
+            if (categoryDto.getParentId().equals(-1)) {
+                categoryDto.setParentId(null);
+            }
             categoryService.insertCategory(categoryDto);
             return new ModelAndView("redirect:/category");
         }catch (StoreException e) {

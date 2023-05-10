@@ -13,7 +13,7 @@ public interface CategoryService {
     void insertCategory(CategoryDto categoryDto) throws StoreException;
 
     Category getCategoryById(Integer id) throws StoreException;
-    List<Category> getCategoriesById(Integer id) throws StoreException;
+    List<Category> getCategoriesByParent(Category parent) throws StoreException;
 
-    List<CategoryListDto> findAllCategories();
+    List<CategoryListDto> getHierarchyCategories();
 }

@@ -768,6 +768,8 @@
                             <form:hidden id="parentId" path="parentId"/>
                             <div id="treeview1" class="treeview">
                                 <ul class="list-group">
+                                    <li class="list-group-item node-treeview1" id="-1" style="color:undefined;background-color:undefined;"><span
+                                            class="icon expand-icon glyphicon glyphicon-minus"></span><span class="icon node-icon"></span> Nothing
                                     <c:choose>
                                         <c:when test="${!empty list}">
                                             <c:forEach items="${list}" var="myvar">

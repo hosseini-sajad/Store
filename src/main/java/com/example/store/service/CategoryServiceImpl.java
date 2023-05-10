@@ -45,33 +45,36 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getCategoriesById(Integer id) {
-        return categoryRepository.findAllByIdAndEntityState(id, EntityState.PERSISTENT);
+    public List<Category> getCategoriesByParent(Category parent) {
+        return categoryRepository.findAllByParentAndEntityState(parent, EntityState.PERSISTENT);
     }
 
     @Override
-    public List<CategoryListDto> findAllCategories() {
-        List<Category> parents = categoryRepository.findAllByEntityState(EntityState.PERSISTENT);
-        List<CategoryListDto> categoryListDtos = new ArrayList<>();
-        parents.forEach(category ->
-        {
-            List<Category> children = null;
-            if (Objects.nonNull(category.getParent())) {
-                children = getCategoriesById(category.getParent().getId());
-            }
-            categoryListDtos.add(
-                    CategoryListDto.builder()
-                            .id(category.getId())
-                            .title(category.getTitle())
-                            .children(categoryListToDto(children)).build());
-        });
+    public List<CategoryListDto> getHierarchyCategories() {
+        List<Category> parents = categoryRepository.findAllParentByEntityState(EntityState.PERSISTENT);
 
-        return categoryListDtos;
+        return parents.stream().map(parent -> CategoryListDto.builder()
+                .id(parent.getId())
+                .title(parent.getTitle())
+                .children(convertCategoryListToDtoList(getCategoriesByParent(parent))).build()).collect(Collectors.toList());
+
+//        List<CategoryListDto> categoryListDtos = new ArrayList<>();
+//        parents.forEach(parent ->
+//        {
+//            List<Category> children = getCategoriesByParent(parent);
+//            categoryListDtos.add(
+//                    CategoryListDto.builder()
+//                            .id(parent.getId())
+//                            .title(parent.getTitle())
+//                            .children(convertCategoryListToDtoList(children)).build());
+//        });
+//
+//        return categoryListDtos;
     }
 
-    private List<CategoryListDto> categoryListToDto(List<Category> children) {
-        if (Objects.nonNull(children)) {
-            return children.stream().map(category ->
+    private List<CategoryListDto> convertCategoryListToDtoList(List<Category> categories) {
+        if (Objects.nonNull(categories) && !categories.isEmpty()) {
+            return categories.stream().map(category ->
                     CategoryListDto.builder().id(category.getId()).title(category.getTitle()).build()).toList();
         }
         return null;
