@@ -14,6 +14,7 @@ import java.util.List;
 public class ProductDto {
     private Integer id;
     private String name;
-    private String image;
+    private List<String> images;
     private Double price;
+    private Integer categoryId;
 }

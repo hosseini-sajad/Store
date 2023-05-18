@@ -11,4 +11,6 @@ import java.util.List;
 @Service
 public interface ProductService {
     List<ProductDto> getProducts(Integer categoryId) throws StoreException;
+
+    void insertProduct(ProductDto productDto) throws StoreException;
 }

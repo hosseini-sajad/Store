@@ -1,21 +1,24 @@
 <%--
   Created by IntelliJ IDEA.
   User: DEV
-  Date: 4/22/2023
-  Time: 9:06 PM
+  Date: 5/1/2023
+  Time: 8:14 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib prefix="li" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Input - Mazer Admin Dashboard</title>
 
     <link
             rel="shortcut icon"
-            href="${pageContext.request.contextPath}/backend/compiled/svg/favicon.svg"
+            href="backend/compiled/svg/favicon.svg"
             type="image/x-icon"
     />
     <link
@@ -24,9 +27,33 @@
             type="image/png"
     />
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app-dark.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/iconly.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/backend/compiled/css/app-dark.css"/>
+    <style type="text/css" id="treeview1-style"> .treeview .list-group-item {
+        cursor: pointer
+    }
+
+    .treeview span.indent {
+        margin-left: 10px;
+        margin-right: 10px
+    }
+
+    .treeview span.icon {
+        width: 12px;
+        margin-right: 5px
+    }
+
+    .treeview .node-disabled {
+        color: silver;
+        cursor: not-allowed
+    }
+
+    .node-treeview1 {
+    }
+
+    .node-treeview1:not(.node-disabled):hover {
+        background-color: #F5F5F5;
+    } </style>
 </head>
 
 <body>
@@ -113,7 +140,7 @@
                 <ul class="menu">
                     <li class="sidebar-title">Menu</li>
 
-                    <li class="sidebar-item active">
+                    <li class="sidebar-item">
                         <a href="index.html" class="sidebar-link">
                             <i class="bi bi-grid-fill"></i>
                             <span>Dashboard</span>
@@ -317,14 +344,14 @@
 
                     <li class="sidebar-title">Forms &amp; Tables</li>
 
-                    <li class="sidebar-item has-sub">
+                    <li class="sidebar-item active has-sub">
                         <a href="#" class="sidebar-link">
                             <i class="bi bi-hexagon-fill"></i>
                             <span>Form Elements</span>
                         </a>
 
-                        <ul class="submenu">
-                            <li class="submenu-item">
+                        <ul class="submenu active">
+                            <li class="submenu-item active">
                                 <a href="form-element-input.html" class="submenu-link"
                                 >Input</a
                                 >
@@ -588,23 +615,23 @@
                     <li class="sidebar-title">Pages</li>
 
                     <li class="sidebar-item">
-                        <a href="/user/logout" class="sidebar-link">
+                        <a href="application-email.html" class="sidebar-link">
                             <i class="bi bi-envelope-fill"></i>
-                            <span>Sign out</span>
+                            <span>Email Application</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="/category" class="sidebar-link">
+                        <a href="application-chat.html" class="sidebar-link">
                             <i class="bi bi-chat-dots-fill"></i>
-                            <span>Category</span>
+                            <span>Chat Application</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="/product/add" class="sidebar-link">
+                        <a href="application-gallery.html" class="sidebar-link">
                             <i class="bi bi-image-fill"></i>
-                            <span>Add Product</span>
+                            <span>Photo Gallery</span>
                         </a>
                     </li>
 
@@ -704,322 +731,147 @@
         </header>
 
         <div class="page-heading">
-            <h3>Profile Statistics</h3>
-        </div>
-        <div class="page-content">
-            <section class="row">
-                <div class="col-12 col-lg-9">
-                    <div class="row">
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
-                                        >
-                                            <div class="stats-icon purple mb-2">
-                                                <i class="iconly-boldShow"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                            <h6 class="text-muted font-semibold">
-                                                Profile Views
-                                            </h6>
-                                            <h6 class="font-extrabold mb-0">112.000</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
-                                        >
-                                            <div class="stats-icon blue mb-2">
-                                                <i class="iconly-boldProfile"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                            <h6 class="text-muted font-semibold">Followers</h6>
-                                            <h6 class="font-extrabold mb-0">183.000</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
-                                        >
-                                            <div class="stats-icon green mb-2">
-                                                <i class="iconly-boldAdd-User"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                            <h6 class="text-muted font-semibold">Following</h6>
-                                            <h6 class="font-extrabold mb-0">80.000</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-lg-3 col-md-6">
-                            <div class="card">
-                                <div class="card-body px-4 py-4-5">
-                                    <div class="row">
-                                        <div
-                                                class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start"
-                                        >
-                                            <div class="stats-icon red mb-2">
-                                                <i class="iconly-boldBookmark"></i>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                                            <h6 class="text-muted font-semibold">Saved Post</h6>
-                                            <h6 class="font-extrabold mb-0">112</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        <h3>Category</h3>
+                        <p class="text-subtitle text-muted">
+                            Add category
+                        </p>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Profile Visit</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div id="chart-profile-visit"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav
+                                aria-label="breadcrumb"
+                                class="breadcrumb-header float-start float-lg-end"
+                        >
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item">
+                                    <a href="index.html">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Input
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
-                    <div class="row">
-                        <div class="col-12 col-xl-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Profile Visit</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <div class="d-flex align-items-center">
-                                                <svg
-                                                        class="bi text-primary"
-                                                        width="32"
-                                                        height="32"
-                                                        fill="blue"
-                                                        style="width: 10px"
-                                                >
-                                                </svg>
-                                                <h5 class="mb-0 ms-3">Europe</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-5">
-                                            <h5 class="mb-0 text-end">862</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <div id="chart-europe"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <div class="d-flex align-items-center">
-                                                <svg
-                                                        class="bi text-success"
-                                                        width="32"
-                                                        height="32"
-                                                        fill="blue"
-                                                        style="width: 10px"
-                                                >
-                                                </svg>
-                                                <h5 class="mb-0 ms-3">America</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-5">
-                                            <h5 class="mb-0 text-end">375</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <div id="chart-america"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-7">
-                                            <div class="d-flex align-items-center">
-                                                <svg
-                                                        class="bi text-danger"
-                                                        width="32"
-                                                        height="32"
-                                                        fill="blue"
-                                                        style="width: 10px"
-                                                >
-                                                </svg>
-                                                <h5 class="mb-0 ms-3">Indonesia</h5>
-                                            </div>
-                                        </div>
-                                        <div class="col-5">
-                                            <h5 class="mb-0 text-end">1025</h5>
-                                        </div>
-                                        <div class="col-12">
-                                            <div id="chart-indonesia"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-xl-8">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4>Latest Comments</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover table-lg">
-                                            <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Comment</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="${pageContext.request.contextPath}/backend/compiled/jpg/5.jpg" />
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Cantik</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class="mb-0">
-                                                        Congratulations on your graduation!
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="avatar avatar-md">
-                                                            <img src="${pageContext.request.contextPath}/backend/compiled/jpg/2.jpg" />
-                                                        </div>
-                                                        <p class="font-bold ms-3 mb-0">Si Ganteng</p>
-                                                    </div>
-                                                </td>
-                                                <td class="col-auto">
-                                                    <p class="mb-0">
-                                                        Wow amazing design! Can you make another
-                                                        tutorial for this design?
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-3">
-                    <div class="card">
-                        <div class="card-body py-4 px-4">
-                            <div class="d-flex align-items-center">
-                                <div class="avatar avatar-xl">
-                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/1.jpg" alt="Face 1" />
-                                </div>
-                                <div class="ms-3 name">
-                                    <h5 class="font-bold">John Duck</h5>
-                                    <h6 class="text-muted mb-0">@johnducky</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Recent Messages</h4>
-                        </div>
-                        <div class="card-content pb-4">
-                            <div class="recent-message d-flex px-4 py-3">
-                                <div class="avatar avatar-lg">
-                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/4.jpg" />
-                                </div>
-                                <div class="name ms-4">
-                                    <h5 class="mb-1">Hank Schrader</h5>
-                                    <h6 class="text-muted mb-0">@johnducky</h6>
-                                </div>
-                            </div>
-                            <div class="recent-message d-flex px-4 py-3">
-                                <div class="avatar avatar-lg">
-                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/5.jpg" />
-                                </div>
-                                <div class="name ms-4">
-                                    <h5 class="mb-1">Dean Winchester</h5>
-                                    <h6 class="text-muted mb-0">@imdean</h6>
-                                </div>
-                            </div>
-                            <div class="recent-message d-flex px-4 py-3">
-                                <div class="avatar avatar-lg">
-                                    <img src="${pageContext.request.contextPath}/backend/compiled/jpg/1.jpg" />
-                                </div>
-                                <div class="name ms-4">
-                                    <h5 class="mb-1">John Dodol</h5>
-                                    <h6 class="text-muted mb-0">@dodoljohn</h6>
-                                </div>
-                            </div>
-                            <div class="px-4">
-                                <button
-                                        class="btn btn-block btn-xl btn-outline-primary font-bold mt-3"
-                                >
-                                    Start Conversation
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Visitors Profile</h4>
-                        </div>
-                        <div class="card-body">
-                            <div id="chart-visitors-profile"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <footer>
-            <div class="footer clearfix mb-0 text-muted">
-                <div class="float-start">
-                    <p>2023 &copy; Mazer</p>
-                </div>
-                <div class="float-end">
-                    <p>
-                        Crafted with
-                        <span class="text-danger"
-                        ><i class="bi bi-heart-fill icon-mid"></i
-                        ></span>
-                        by <a href="https://saugi.me">Saugi</a>
-                    </p>
                 </div>
             </div>
-        </footer>
+            <section class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Add new Product</h4>
+                    </div>
+
+                    <form:form class="category" action="/product/add" method="post" modelAttribute="productDto">
+                    <%-- Category Section   --%>
+                        <div class="col-sm-4">
+                            <form:hidden id="parentId" path="categoryId"/>
+                            <div id="treeview1" class="treeview">
+                                <ul class="list-group">
+                                    <li class="list-group-item node-treeview1" id="-1" style="color:undefined;background-color:undefined;"><span
+                                            class="icon expand-icon glyphicon glyphicon-minus"></span><span class="icon node-icon"></span> Nothing
+                                    <c:choose>
+                                        <c:when test="${!empty categories}">
+                                            <c:forEach items="${categories}" var="myvar">
+                                                <li class="list-group-item node-treeview1" id="${myvar.id}" style="color:undefined;background-color:undefined;"><span
+                                                        class="icon expand-icon glyphicon glyphicon-minus"></span><span class="icon node-icon"></span> ${myvar.title}
+                                                <c:choose>
+                                                    <c:when test="${!empty myvar.children}">
+                                                        <c:forEach items="${myvar.children}" var="children">
+                                                            <li class="list-group-item node-treeview1" id="${children.id}" style="color:undefined;background-color:undefined;">
+                                                            <span class="indent"></span>
+                                                            <span class="icon expand-icon glyphicon glyphicon-minus"></span><span class="icon node-icon"></span> ${children.title}
+
+                                                        </c:forEach>
+                                                    </c:when>
+                                                </c:choose>
+                                                </li>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr>
+                                                <td colspan="5">موردی برای نمایش یافت نشد</td>
+                                            </tr>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </ul>
+                            </div>
+                        </div>
+                    <%-- End Category Section   --%>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="basicInput">Product Name</label>
+                                    <form:input
+                                            type="text"
+                                            class="form-control"
+                                            id="basicInput"
+                                            placeholder="Enter category name"
+                                            path="name"
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="basicInput">Product Price</label>
+                                    <form:input
+                                            type="text"
+                                            class="form-control"
+                                            id="basicInput"
+                                            placeholder="Enter category name"
+                                            path="price"
+                                    />
+                                </div>
+
+                            </div>
+                            <div class="col-md-7">
+                                <form:button class="btn btn-primary" type="submit">Add Product</form:button>
+                            </div>
+
+                        </div>
+                    </div>
+                    </form:form>
+                </div>
+            </section>
+
+
+            <footer>
+                <div class="footer clearfix mb-0 text-muted">
+                    <div class="float-start">
+                        <p>2023 &copy; Mazer</p>
+                    </div>
+                    <div class="float-end">
+                        <p>
+                            Crafted with
+                            <span class="text-danger"
+                            ><i class="bi bi-heart-fill icon-mid"></i
+                            ></span>
+                            by <a href="https://saugi.me">Saugi</a>
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
+    <script src="${pageContext.request.contextPath}/backend/static/js/components/dark.js"></script>
+    <script src="${pageContext.request.contextPath}/backend/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+    <script src="${pageContext.request.contextPath}/backend/compiled/js/app.js"></script>
+
+    <script src="jquery.js"></script>
+    <script src="${pageContext.request.contextPath}/backend/compiled/js/bootstrap-treeview.js"></script>
+
+    <script>
+            var a = document.getElementById('treeview1').getElementsByTagName('li');
+
+            for (var i = 0; i < a.length; i++) {
+                a[i].onclick = function () {
+                    document.getElementById('parentId').setAttribute('value', this.id);
+                }
+            }
+
+    </script>
 </div>
-<script src="${pageContext.request.contextPath}/backend/static/js/components/dark.js"></script>
-<script src="${pageContext.request.contextPath}/backend/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-
-<script src="${pageContext.request.contextPath}/backend/compiled/js/app.js"></script>
-
-<!-- Need: Apexcharts -->
-<script src="${pageContext.request.contextPath}/backend/extensions/apexcharts/apexcharts.min.js"></script>
-<script src="${pageContext.request.contextPath}/backend/static/js/pages/dashboard.js"></script>
 </body>
 </html>
