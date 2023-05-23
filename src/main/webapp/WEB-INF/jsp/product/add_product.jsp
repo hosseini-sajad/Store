@@ -762,7 +762,7 @@
                         <h4 class="card-title">Add new Product</h4>
                     </div>
 
-                    <form:form class="category" action="/product/add" method="post" modelAttribute="productDto">
+                    <form:form class="category" action="/product/add" method="post" modelAttribute="productDto" enctype="multipart/form-data">
                     <%-- Category Section   --%>
                         <div class="col-sm-4">
                             <form:hidden id="parentId" path="categoryId"/>
@@ -825,6 +825,27 @@
                                 </div>
 
                             </div>
+
+                            <div class="form-group">
+                                <label for="image1">Product Image 1</label>
+                                <input
+                                        type="file"
+                                        class="form-control"
+                                        id="image1"
+                                        name="image1"
+                                />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image2">Product Image 2</label>
+                                <input
+                                        type="file"
+                                        class="form-control"
+                                        id="image2"
+                                        name="image2"
+                                />
+                            </div>
+
                             <div class="col-md-7">
                                 <form:button class="btn btn-primary" type="submit">Add Product</form:button>
                             </div>

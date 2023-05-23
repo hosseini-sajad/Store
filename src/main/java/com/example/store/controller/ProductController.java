@@ -5,10 +5,12 @@ import com.example.store.core.StoreException;
 import com.example.store.dto.ProductDto;
 import com.example.store.service.CategoryService;
 import com.example.store.service.ProductService;
+import jakarta.servlet.annotation.MultipartConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -47,9 +49,9 @@ public class ProductController {
     }
 
     @PostMapping(value = "/add")
-    public ModelAndView insertProduct(@ModelAttribute ProductDto productDto) {
+    public ModelAndView insertProduct(@ModelAttribute ProductDto productDto, @RequestParam MultipartFile image1, @RequestParam MultipartFile image2) {
         try {
-            productService.insertProduct(productDto);
+            productService.insertProduct(productDto, image1, image2);
             return new ModelAndView("redirect:/product/add");
         } catch (StoreException e) {
             return new ModelAndView("error", new HashMap<>() {{

@@ -4,6 +4,7 @@ import com.example.store.model.Category;
 import com.example.store.model.Product;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
@@ -14,7 +15,8 @@ import java.util.List;
 public class ProductDto {
     private Integer id;
     private String name;
-    private List<String> images;
-    private Double price;
+    private BigDecimal price;
     private Integer categoryId;
+    // buy price
+    private BigDecimal fee;
 }
