@@ -14,7 +14,10 @@ public enum Error {
     ERROR_READ_CATEGORY("0008", "مشکل در فراخوانی دسته بندی"),
     ERROR_PRODUCT_NAME("0009", "لطفا نام محصول را وارد کنید"),
     ERROR0_PRODUCT_NAME_LENGTH("00010", "طول دسته بندی بیش از 2 کارکتر باشد"),
-    ERROR0_PRODUCT_PRICE_COUNT("00010", "طول دسته بندی بیش از 2 کارکتر باشد");
+    ERROR0_PRODUCT_PRICE_COUNT("00010", "طول دسته بندی بیش از 2 کارکتر باشد"),
+    UPLOAD_FILE("00011", "در بارگذاری تصاویر مشکلی پیش آمده است"),
+
+    ;
 
     final String code;
     final String message;

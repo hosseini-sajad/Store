@@ -7,22 +7,14 @@ import com.example.store.dto.ProductDto;
 import com.example.store.model.Category;
 import com.example.store.model.Product;
 import com.example.store.repository.ProductRepository;
-import org.eclipse.tags.shaded.org.apache.bcel.generic.IF_ACMPEQ;
 import org.hibernate.event.internal.EntityState;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -47,35 +39,43 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void insertProduct(ProductDto productDto, MultipartFile... images) throws StoreException {
         validateProduct(productDto);
-        List<File> files = ConvertMultipartToFile(images);
+        List<File> files = new ArrayList<>();
+        if (images.length > 0) {
+            try {
+                files = ConvertMultipartToFile(images);
+            } catch (Exception e) {
+                throw new StoreException(Error.UPLOAD_FILE);
+            }
+        }
         Product product = productDtoToProduct(productDto, files);
         productRepository.save(product);
     }
 
-    private List<File> ConvertMultipartToFile(MultipartFile[] images) {
-        ClassLoader classLoader = StoreApplication.class.getClassLoader();
-        try {
-            Files.createDirectory(Paths.get(classLoader.getResource("images" + File.separator + "product").toURI()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+    private List<File> ConvertMultipartToFile(MultipartFile[] images) throws Exception {
+        File resourceDirectory = new File(Objects.requireNonNull(StoreApplication.class.getResource("")).toURI());
+        File newDirectory = new File(resourceDirectory, "images" + File.separator + "products");
+        if (!newDirectory.exists()) {
+            newDirectory.mkdir();
         }
         List<File> files = new ArrayList<>();
-        Arrays.stream(images).forEach(image -> {
+        for (MultipartFile image : images) {
             if (image.isEmpty()) {
-                return;
+                continue;
             }
-            try {
-                Path file = Files.createFile(Paths.get(classLoader.getResource("images" + File.separator + "product" + File.separator + image.getOriginalFilename()).toURI()));
-                image.transferTo(file);
-                files.add(file.toFile());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
+            Integer postfix = null;
+            File file;
+            while (true) {
+                file = new File(newDirectory, Objects.requireNonNull(image.getOriginalFilename()) + (Objects.nonNull(postfix) ? postfix : ""));
+                if (!file.exists()) {
+                    if (file.createNewFile()) {
+                        break;
+                    }
+                }
+                postfix = (Objects.nonNull(postfix) ? postfix + 1 : 1);
             }
-        });
+            image.transferTo(file);
+            files.add(file);
+        }
         return files;
     }
 
@@ -84,7 +84,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = Product.builder()
                 .name(productDto.getName())
                 .price(productDto.getPrice())
-                .images(files.isEmpty() ? null : files.stream().map(file -> file.getAbsolutePath()).collect(Collectors.toList()))
+                .images(files.isEmpty() ? null : files.stream().map(File::getAbsolutePath).collect(Collectors.toList()))
                 .category(category).build();
         product.setEntityState(EntityState.PERSISTENT);
 
@@ -105,10 +105,10 @@ public class ProductServiceImpl implements ProductService {
 
     private List<ProductDto> productListToDto(List<Product> products) {
         return products.stream().map(product -> ProductDto.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .price(product.getPrice())
-                .build())
+                        .id(product.getId())
+                        .name(product.getName())
+                        .price(product.getPrice())
+                        .build())
                 .collect(Collectors.toList());
     }
 }
