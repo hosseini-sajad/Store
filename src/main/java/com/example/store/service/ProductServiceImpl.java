@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
         File resourceDirectory = new File(Objects.requireNonNull(StoreApplication.class.getResource("")).toURI());
         File newDirectory = new File(resourceDirectory, "images" + File.separator + "products");
         if (!newDirectory.exists()) {
-            newDirectory.mkdir();
+            newDirectory.mkdirs();
         }
         List<File> files = new ArrayList<>();
         for (MultipartFile image : images) {
@@ -65,7 +65,13 @@ public class ProductServiceImpl implements ProductService {
             Integer postfix = null;
             File file;
             while (true) {
-                file = new File(newDirectory, Objects.requireNonNull(image.getOriginalFilename()) + (Objects.nonNull(postfix) ? postfix : ""));
+                String[] originalFilename = Objects.requireNonNull(image.getOriginalFilename().split("\\."));
+                String type = originalFilename[originalFilename.length - 1];
+                String filename = "";
+                for (int i = 0; i < originalFilename.length - 1; i++) {
+                    filename += originalFilename[i];
+                }
+                file = new File(newDirectory, filename + (Objects.nonNull(postfix) ? postfix : "") + "." + type);
                 if (!file.exists()) {
                     if (file.createNewFile()) {
                         break;
