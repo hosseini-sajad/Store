@@ -3,7 +3,7 @@ package com.example.store.service;
 import com.example.store.StoreApplication;
 import com.example.store.core.Error;
 import com.example.store.core.StoreException;
-import com.example.store.dto.ProductDto;
+import com.example.store.dto.ProductListDto;
 import com.example.store.model.Category;
 import com.example.store.model.Product;
 import com.example.store.repository.ProductRepository;
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
     CategoryService categoryService;
 
     @Override
-    public List<ProductDto> getProducts(Integer categoryId) throws StoreException {
+    public List<ProductListDto> getProducts(Integer categoryId) throws StoreException {
         if (Objects.nonNull(categoryId)) {
             return productListToDto(productRepository.findAllByCategoryAndEntityState(categoryService.getCategoryById(categoryId), EntityState.PERSISTENT));
         }
@@ -37,8 +37,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void insertProduct(ProductDto productDto, MultipartFile... images) throws StoreException {
-        validateProduct(productDto);
+    public void insertProduct(ProductListDto productListDto, MultipartFile... images) throws StoreException {
+        validateProduct(productListDto);
         List<File> files = new ArrayList<>();
         if (images.length > 0) {
             try {
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
                 throw new StoreException(Error.UPLOAD_FILE);
             }
         }
-        Product product = productDtoToProduct(productDto, files);
+        Product product = productDtoToProduct(productListDto, files);
         productRepository.save(product);
     }
 
@@ -85,11 +85,11 @@ public class ProductServiceImpl implements ProductService {
         return files;
     }
 
-    private Product productDtoToProduct(ProductDto productDto, List<File> files) throws StoreException {
-        Category category = categoryService.getCategoryById(productDto.getCategoryId());
+    private Product productDtoToProduct(ProductListDto productListDto, List<File> files) throws StoreException {
+        Category category = categoryService.getCategoryById(productListDto.getCategoryId());
         Product product = Product.builder()
-                .name(productDto.getName())
-                .price(productDto.getPrice())
+                .name(productListDto.getName())
+                .price(productListDto.getPrice())
                 .images(files.isEmpty() ? null : files.stream().map(File::getAbsolutePath).collect(Collectors.toList()))
                 .category(category).build();
         product.setEntityState(EntityState.PERSISTENT);
@@ -97,23 +97,24 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
-    private void validateProduct(ProductDto productDto) throws StoreException {
-        if (productDto.getName().isBlank()) {
+    private void validateProduct(ProductListDto productListDto) throws StoreException {
+        if (productListDto.getName().isBlank()) {
             throw new StoreException(Error.ERROR_PRODUCT_NAME);
         }
-        if (productDto.getName().length() < 2) {
+        if (productListDto.getName().length() < 2) {
             throw new StoreException(Error.ERROR0_PRODUCT_NAME_LENGTH);
         }
-        if (productDto.getPrice().compareTo(BigDecimal.ZERO) < 0) {
+        if (productListDto.getPrice().compareTo(BigDecimal.ZERO) < 0) {
             throw new StoreException(Error.ERROR0_PRODUCT_PRICE_COUNT);
         }
     }
 
-    private List<ProductDto> productListToDto(List<Product> products) {
-        return products.stream().map(product -> ProductDto.builder()
+    private List<ProductListDto> productListToDto(List<Product> products) {
+        return products.stream().map(product -> ProductListDto.builder()
                         .id(product.getId())
                         .name(product.getName())
                         .price(product.getPrice())
+                        .image(product.getImages().get(0))
                         .build())
                 .collect(Collectors.toList());
     }
