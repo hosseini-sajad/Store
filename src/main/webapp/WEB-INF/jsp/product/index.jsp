@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.example.store.StoreApplication" %><%--
   Created by IntelliJ IDEA.
   User: DEV
   Date: 5/13/2023
@@ -228,13 +228,14 @@
                             <c:choose>
                                 <c:when test="${!empty products}">
                                     <c:forEach items="${products}" var="productDto">
-                                        ${System.out.println(productDto.image.split("target").)}
+                                        <% System.out.println(StoreApplication.class.getResource(""));%>
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="product text-center">
                                                 <div class="mb-3 position-relative">
                                                     <div class="badge text-white bg-"></div>
                                                     <a class="d-block" href="detail.html"><img class="img-fluid w-100"
-                                                                                               src="${productDto.image}"
+inja bayad masir image ra bedim ke dakhele file target hast vali ${StoreApplication.class.getResource("")} be file target eshare nemikoneee!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                                                                               src="${StoreApplication.class.getResource("")}/images/products/${productDto.image}"
                                                                                                alt="..."></a>
                                                     <div class="product-overlay">
                                                         <ul class="mb-0 list-inline">
