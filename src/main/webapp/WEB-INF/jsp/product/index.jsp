@@ -234,8 +234,7 @@
                                                 <div class="mb-3 position-relative">
                                                     <div class="badge text-white bg-"></div>
                                                     <a class="d-block" href="detail.html"><img class="img-fluid w-100"
-inja bayad masir image ra bedim ke dakhele file target hast vali ${StoreApplication.class.getResource("")} be file target eshare nemikoneee!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                                                                               src="${StoreApplication.class.getResource("")}/images/products/${productDto.image}"
+                                                                                               src="${pageContext.request.contextPath}/${productDto.image}"
                                                                                                alt="..."></a>
                                                     <div class="product-overlay">
                                                         <ul class="mb-0 list-inline">

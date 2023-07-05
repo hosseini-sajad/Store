@@ -9,11 +9,14 @@ import com.example.store.model.Product;
 import com.example.store.repository.ProductRepository;
 import org.hibernate.event.internal.EntityState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -52,11 +55,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private List<File> ConvertMultipartToFile(MultipartFile[] images) throws Exception {
-        File resourceDirectory = new File(Objects.requireNonNull(StoreApplication.class.getResource("")).toURI());
-        File newDirectory = new File(resourceDirectory, "images" + File.separator + "products");
+        ClassPathResource resource = new ClassPathResource(File.separator + "target" + File.separator + "classes" + File.separator + "static" + File.separator + "images" + File.separator + "product", StoreApplication.class);
+        File newDirectory = new File(resource.getPath());
         if (!newDirectory.exists()) {
             newDirectory.mkdirs();
         }
+        newDirectory = newDirectory.toPath().toAbsolutePath().toFile();
         List<File> files = new ArrayList<>();
         for (MultipartFile image : images) {
             if (image.isEmpty()) {
@@ -110,12 +114,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private List<ProductListDto> productListToDto(List<Product> products) {
-        return products.stream().map(product -> ProductListDto.builder()
-                        .id(product.getId())
-                        .name(product.getName())
-                        .price(product.getPrice())
-                        .image(product.getImages().get(0))
-                        .build())
-                .collect(Collectors.toList());
+        List<ProductListDto> list = new ArrayList<>();
+        for (Product product : products) {
+            String productsPath = "";
+            try {
+                ClassPathResource resource = new ClassPathResource(File.separator + "target" + File.separator + "classes" + File.separator + "static", StoreApplication.class);
+                File newDirectory = new File(resource.getPath()).toPath().toAbsolutePath().toFile();
+                Path path = newDirectory.toPath();
+                Path relativize = path.relativize(Paths.get(product.getImages().get(0)));
+                productsPath = relativize.toString();
+            } catch (Exception e) {
+
+            }
+            ProductListDto build = ProductListDto.builder()
+                    .id(product.getId())
+                    .name(product.getName())
+                    .price(product.getPrice())
+                    .image(productsPath)
+                    .build();
+            list.add(build);
+        }
+        return list;
     }
 }
