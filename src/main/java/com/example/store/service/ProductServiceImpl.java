@@ -146,6 +146,16 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private ProductDto productToProductDto(Product product) {
+        String productsPath = "";
+        try {
+            ClassPathResource resource = new ClassPathResource(File.separator + "target" + File.separator + "classes" + File.separator + "static", StoreApplication.class);
+            File newDirectory = new File(resource.getPath()).toPath().toAbsolutePath().toFile();
+            Path path = newDirectory.toPath();
+            Path relativize = path.relativize(Paths.get(product.getImages().get(0)));
+            productsPath = relativize.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ProductDto.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -155,7 +165,7 @@ public class ProductServiceImpl implements ProductService {
                 .rate(product.getRate())
                 .fee(product.getFee())
                 .category(product.getCategory())
-                .images(product.getImages())
+                .images(productsPath)
                 .tags(product.getTags())
                 .build();
     }

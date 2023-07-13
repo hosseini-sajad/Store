@@ -22,6 +22,6 @@ public class ProductDto {
     private Float rate;
     private BigDecimal fee;
     private Category category;
-    private List<String> images;
+    private String images;
     private List<String> tags;
 }

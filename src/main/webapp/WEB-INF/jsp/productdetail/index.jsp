@@ -186,7 +186,7 @@
                                                                                 data-gallery="gallery2"
                                                                                 data-glightbox="Product item 1"><img
                                                     class="img-fluid"
-                                                    src="${pageContext.request.contextPath}/frontend/img/product-detail-1.jpg"
+                                                    src="${pageContext.request.contextPath}/${product.images}"
                                                     alt="..."></a></div>
                                             <div class="swiper-slide h-auto"><a class="glightbox product-view"
                                                                                 href="${pageContext.request.contextPath}/frontend/img/product-detail-2.jpg"
