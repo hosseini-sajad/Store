@@ -3,6 +3,7 @@ package com.example.store.service;
 import com.example.store.StoreApplication;
 import com.example.store.core.Error;
 import com.example.store.core.StoreException;
+import com.example.store.dto.ProductDto;
 import com.example.store.dto.ProductListDto;
 import com.example.store.model.Category;
 import com.example.store.model.Product;
@@ -37,6 +38,13 @@ public class ProductServiceImpl implements ProductService {
         }
         return productListToDto(productRepository.findAllByEntityState(EntityState.PERSISTENT));
 
+    }
+
+    @Override
+    public ProductDto getProduct(Integer productId) throws StoreException {
+        Product product = productRepository.findByIdAndEntityState(productId, EntityState.PERSISTENT);
+
+        return productToProductDto(product);
     }
 
     @Override
@@ -135,5 +143,20 @@ public class ProductServiceImpl implements ProductService {
             list.add(build);
         }
         return list;
+    }
+
+    private ProductDto productToProductDto(Product product) {
+        return ProductDto.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .price(product.getPrice())
+                .options(product.getOptions())
+                .description(product.getDescription())
+                .rate(product.getRate())
+                .fee(product.getFee())
+                .category(product.getCategory())
+                .images(product.getImages())
+                .tags(product.getTags())
+                .build();
     }
 }

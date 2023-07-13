@@ -602,7 +602,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="/product/add" class="sidebar-link">
+                        <a href="/products/add" class="sidebar-link">
                             <i class="bi bi-image-fill"></i>
                             <span>Add Product</span>
                         </a>

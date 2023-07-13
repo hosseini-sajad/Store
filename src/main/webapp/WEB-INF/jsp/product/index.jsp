@@ -228,12 +228,11 @@
                             <c:choose>
                                 <c:when test="${!empty products}">
                                     <c:forEach items="${products}" var="productDto">
-                                        <% System.out.println(StoreApplication.class.getResource(""));%>
                                         <div class="col-lg-4 col-sm-6">
                                             <div class="product text-center">
                                                 <div class="mb-3 position-relative">
                                                     <div class="badge text-white bg-"></div>
-                                                    <a class="d-block" href="detail.html"><img class="img-fluid w-100"
+                                                    <a class="d-block" href="/products/${productDto.id}"><img class="img-fluid w-100"
                                                                                                src="${pageContext.request.contextPath}/${productDto.image}"
                                                                                                alt="..."></a>
                                                     <div class="product-overlay">

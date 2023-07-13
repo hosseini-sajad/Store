@@ -762,7 +762,7 @@
                         <h4 class="card-title">Add new Product</h4>
                     </div>
 
-                    <form:form class="category" action="/product/add" method="post" modelAttribute="productListDto" enctype="multipart/form-data">
+                    <form:form class="category" action="/products/add" method="post" modelAttribute="productListDto" enctype="multipart/form-data">
                     <%-- Category Section   --%>
                         <div class="col-sm-4">
                             <form:hidden id="parentId" path="categoryId"/>

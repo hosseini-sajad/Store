@@ -39,6 +39,7 @@ public class Product extends BaseEntity {
     private List<String> images;
 
 
+    // create a new table in db
     @ElementCollection
     private List<String> tags;
 

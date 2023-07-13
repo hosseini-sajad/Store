@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 
 @Controller
-@RequestMapping(value = "product")
+@RequestMapping(value = "products")
 public class ProductController {
 
     @Autowired
@@ -21,7 +21,7 @@ public class ProductController {
     @Autowired
     CategoryService categoryService;
 
-    @GetMapping(value = {"", "/{categoryId}"})
+    @GetMapping(value = {"", "/category/{categoryId}"})
     public ModelAndView getProducts(@PathVariable(required = false) Integer categoryId) {
         try {
             return new ModelAndView("product/index", new HashMap<>() {{
@@ -48,7 +48,21 @@ public class ProductController {
     public ModelAndView insertProduct(@ModelAttribute ProductListDto productListDto, @RequestParam MultipartFile image1, @RequestParam MultipartFile image2) {
         try {
             productService.insertProduct(productListDto, image1, image2);
-            return new ModelAndView("redirect:/product/add");
+            return new ModelAndView("redirect:/products/add");
+        } catch (StoreException e) {
+            return new ModelAndView("error", new HashMap<>() {{
+                put("code", e.getCode());
+                put("message", e.getMessage());
+            }});
+        }
+    }
+
+    @GetMapping(value = {"/{productId}"})
+    public ModelAndView getProductDetail(@PathVariable Integer productId) {
+        try {
+            return new ModelAndView("productdetail/index", new HashMap<>() {{
+                put("product", productService.getProduct(productId));
+            }});
         } catch (StoreException e) {
             return new ModelAndView("error", new HashMap<>() {{
                 put("code", e.getCode());

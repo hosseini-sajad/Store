@@ -13,4 +13,6 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     List<Product> findAllByCategoryAndEntityState(Category category, EntityState entityState);
 
     List<Product> findAllByEntityState(EntityState entityState);
+
+    Product findByIdAndEntityState(Integer id, EntityState entityState);
 }
